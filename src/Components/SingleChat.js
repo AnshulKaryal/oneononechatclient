@@ -54,7 +54,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `https://oneononechatserver.onrender.com/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -86,7 +86,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         const messageContentWithNewlines = newMessage.replace(/\n/g, "<br>");
 
         const { data } = await axios.post(
-          "/api/message",
+          "https://oneononechatserver.onrender.com/api/message",
           {
             // content: newMessage,
             content: messageContentWithNewlines,

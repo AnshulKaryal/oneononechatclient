@@ -54,7 +54,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "/api/user/login",
+        "https://oneononechatserver.onrender.com/api/user/login",
         { email, password },
         config
       );

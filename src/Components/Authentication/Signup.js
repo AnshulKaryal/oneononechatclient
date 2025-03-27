@@ -172,7 +172,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user",
+        "https://oneononechatserver.onrender.com/api/user",
         { name, email, password, photo },
         config
       );
