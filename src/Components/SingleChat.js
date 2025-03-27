@@ -20,7 +20,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import io from "socket.io-client";
 import { ChatState } from "../context/chatProvider.js";
 import ScrollableChat from "./ScrollableChat";
-const ENDPOINT = "http://localhost:1000";
+const ENDPOINT = "https://oneononechatserver.onrender.com";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
