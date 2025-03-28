@@ -21,7 +21,6 @@ const Signup = () => {
   const [email, setEmail] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
-  const [photo, setPhoto] = useState();
   const [selectedFileName, setSelectedFileName] = useState();
   const [loading, setLoading] = useState(false);
   const toast = useToast();
@@ -47,52 +46,6 @@ const Signup = () => {
   const validatePasswordCharacter = (password) => {
     const specialCharacterRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
     return specialCharacterRegex.test(password);
-  };
-  const picUpload = (photo) => {
-    setLoading(true);
-    if (photo === undefined) {
-      toast({
-        title: "Please Select an Image",
-        status: "warning",
-        duration: 2000,
-        isClosable: true,
-        position: "bottom",
-      });
-      return;
-    }
-    if (
-      photo.type === "image/jpeg" ||
-      photo.type === "image/png" ||
-      photo.type === "image.jpg"
-    ) {
-      const data = new FormData();
-      data.append("file", photo);
-      data.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
-      data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
-      fetch(process.env.REACT_APP_IMAGE_API, {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setPhoto(data.url.toString());
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
-    } else {
-      toast({
-        title: "Please Select an Image",
-        status: "warning",
-        duration: 2000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
-      return;
-    }
   };
 
   const submitHandler = async () => {
@@ -173,7 +126,7 @@ const Signup = () => {
       };
       const { data } = await axios.post(
         "https://oneononechatserver.onrender.com/api/user",
-        { name, email, password, photo },
+        { name, email, password },
         config
       );
       toast({
@@ -199,15 +152,6 @@ const Signup = () => {
         position: "bottom",
       });
       setLoading(false);
-    }
-  };
-  const handleFileSelect = (event) => {
-    const photo = event.target.files[0];
-    if (photo) {
-      setSelectedFileName(photo.name);
-      picUpload(photo);
-    } else {
-      setSelectedFileName("");
     }
   };
   return (
